@@ -18,29 +18,25 @@ using System.Windows.Shapes;
 namespace Partner_Management.Views
 {
     /// <summary>
-    /// Interaction logic for PartnerList.xaml
+    /// Interaction logic for UpdatePartner.xaml
     /// </summary>
-    public partial class PartnerList : Page
+    public partial class UpdatePartner : Page
     {
         private MainWindow mainWindow;
-        public PartnerList(MainWindow mainWindow, PartnerViewModel viewModel)
+        private Partner partner;
+
+        public UpdatePartner(MainWindow mainWindow, PartnerViewModel partnerViewModel, Partner partner)
         {
             InitializeComponent();
 
             this.mainWindow = mainWindow;
+            this.partner = partner;
 
-            DataContext = viewModel;
+
         }
-
-        private void UpdatePartner_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Partner partner = (Partner)PartnerListBox.SelectedItem;
-            mainWindow.OpenPage(MainWindow.Pages.UpdatePartner, partner);
-        }
-
-        private void CreatePartner_Click(object sender, RoutedEventArgs e)
-        {
-            mainWindow.OpenPage(MainWindow.Pages.CreatePartner);
+            mainWindow.OpenPage(MainWindow.Pages.PartnerList);
         }
     }
 }

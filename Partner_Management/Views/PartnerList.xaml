@@ -9,13 +9,20 @@
       Title="PartnerList">
 
     <Grid>
-        <ListBox ItemsSource="{Binding Partners}" HorizontalContentAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="30" Text="Список партнеров" HorizontalAlignment="Center"/>
+
+        <ListBox x:Name="PartnerListBox" Grid.Row="1" ItemsSource="{Binding Partners}" HorizontalContentAlignment="Stretch" SelectionChanged="UpdatePartner_Click">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="1">
-                        <Grid>
+                        <Grid Background="{StaticResource SecondaryColor}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="5*"/>  
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -41,5 +48,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                Background="{StaticResource AccentColor}" Margin="15" Content="+" MinHeight="40" MinWidth="40"
+                Click="CreatePartner_Click"/>
     </Grid>
 </Page>

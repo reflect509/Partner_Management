@@ -1,4 +1,5 @@
-﻿using Partner_Management.ViewModels;
+﻿using Partner_Management.Models;
+using Partner_Management.ViewModels;
 using Partner_Management.Views;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -21,7 +22,9 @@ public partial class MainWindow : Window
 {
     public enum Pages
     {
-        PartnerList
+        PartnerList,
+        UpdatePartner,
+        CreatePartner
     }
 
     public MainWindow()
@@ -36,6 +39,18 @@ public partial class MainWindow : Window
         if (page == Pages.PartnerList)
         {
             MainFrame.Navigate(new PartnerList(this, new PartnerViewModel()));
+        }
+        else if (page == Pages.CreatePartner)
+        {
+            MainFrame.Navigate(new CreatePartner(this, new PartnerViewModel()));
+        }
+    }
+
+    public void OpenPage(Pages page, Partner partner)
+    {
+        if (page == Pages.UpdatePartner)
+        {
+            MainFrame.Navigate(new UpdatePartner(this, new PartnerViewModel(), partner));
         }
     }
 }

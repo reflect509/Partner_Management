@@ -32,8 +32,7 @@ namespace Partner_Management.ViewModels
         }
 
         private void LoadProducts()
-        {
-            DatabaseControl.GetDiscountForPartner();   
+        {   
             Partners = new ObservableCollection<Partner>(DatabaseControl.GetPartners());
         }
 
