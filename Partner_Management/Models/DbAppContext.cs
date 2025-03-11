@@ -15,6 +15,8 @@ public partial class DbAppContext : DbContext
     {
     }
 
+    public virtual DbSet<MaterialType> MaterialTypes { get; set; }
+
     public virtual DbSet<Partner> Partners { get; set; }
 
     public virtual DbSet<PartnerProduct> PartnerProducts { get; set; }
@@ -27,10 +29,27 @@ public partial class DbAppContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Database=demo_exam");
+        => optionsBuilder.UseNpgsql("Host=localHost;Username=postgres;Database=demo_exam");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<MaterialType>(entity =>
+        {
+            entity.HasKey(e => e.MaterialTypeId).HasName("material_types_pkey");
+
+            entity.ToTable("material_types");
+
+            entity.HasIndex(e => e.MaterialTypeName, "material_types_material_type_name_key").IsUnique();
+
+            entity.Property(e => e.MaterialTypeId).HasColumnName("material_type_id");
+            entity.Property(e => e.BrokenCoefficient)
+                .HasPrecision(10, 6)
+                .HasColumnName("broken_coefficient");
+            entity.Property(e => e.MaterialTypeName)
+                .HasMaxLength(255)
+                .HasColumnName("material_type_name");
+        });
+
         modelBuilder.Entity<Partner>(entity =>
         {
             entity.HasKey(e => e.PartnerId).HasName("partners_pkey");

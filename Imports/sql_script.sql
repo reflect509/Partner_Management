@@ -1,4 +1,4 @@
-CREATE TABLE product_types
+)CREATE TABLE product_types
 (
 	product_type_id serial PRIMARY KEY,
 	product_type_name varchar(255) NOT NULL UNIQUE, 
@@ -29,7 +29,7 @@ CREATE TABLE partners
 	partner_email varchar(50) NOT NULL,
 	partner_phone varchar(30) NOT NULL,
 	partner_address varchar(255) NOT NULL,
-	TIN varchar(20) NOT NULL UNIQUE,
+	TIN varchar(20) UNIQUE,
 	discount decimal(5, 2),
 	rating decimal(2,0) CHECK (rating > 0)
 );
@@ -41,4 +41,11 @@ CREATE TABLE partner_products
 	amount int NOT NULL CHECK (amount > 0),
 	sell_date date NOT NULL,
 	PRIMARY KEY (product_id, partner_id)
+);
+
+CREATE TABLE material_types
+(
+	material_type_id serial PRIMARY KEY,
+	material_type_name varchar(255) NOT NULL UNIQUE,
+	broke_coefficient decimal(10, 5) NOT NULL
 );

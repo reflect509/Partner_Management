@@ -32,7 +32,7 @@ namespace Partner_Management.Views
             DataContext = viewModel;
         }
 
-        private void UpdatePartner_Click(object sender, RoutedEventArgs e)
+        private void UpdatePartner_SelectionChanged(object sender, RoutedEventArgs e)
         {
             Partner partner = (Partner)PartnerListBox.SelectedItem;
             mainWindow.OpenPage(MainWindow.Pages.UpdatePartner, partner);
@@ -41,6 +41,11 @@ namespace Partner_Management.Views
         private void CreatePartner_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.OpenPage(MainWindow.Pages.CreatePartner);
+        }
+
+        private void PartnerSales_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.OpenPage(MainWindow.Pages.PartnerSales);
         }
     }
 }

@@ -26,14 +26,57 @@ namespace Partner_Management.ViewModels
             }
         }
 
-        public PartnerViewModel()
+        private ObservableCollection<string> partnerTypes = new ObservableCollection<string>();
+
+        public ObservableCollection<string> PartnerTypes
         {
-            LoadProducts();
+            get { return partnerTypes; }
+            set 
+            { 
+                partnerTypes = value; 
+                OnPropertyChanged(nameof(PartnerTypes));
+            }
         }
 
-        private void LoadProducts()
+        private ObservableCollection<PartnerProduct> partnerSales = new ObservableCollection<PartnerProduct>();
+
+        public ObservableCollection<PartnerProduct> PartnerSales
+        {
+            get { return partnerSales; }
+            set 
+            { 
+                partnerSales = value; 
+                OnPropertyChanged(nameof(PartnerSales));
+            }
+        }
+
+        private ObservableCollection<string> partnerNames;
+
+        public ObservableCollection<string> PartnerNames
+        {
+            get { return partnerNames; }
+            set 
+            { 
+                partnerNames = value;
+                OnPropertyChanged(nameof(PartnerNames));
+            }
+        }
+
+
+
+
+        public PartnerViewModel()
+        {
+            LoadPartners();
+        }
+
+        private void LoadPartners()
         {   
-            Partners = new ObservableCollection<Partner>(DatabaseControl.GetPartners());
+            DatabaseControl.GetDiscountForPartner();
+            var partners = DatabaseControl.GetPartners();
+            Partners = new ObservableCollection<Partner>(partners);
+            PartnerTypes = new ObservableCollection<string>(partners.Select(p => p.PartnerTypeNavigation.PartnerTypeName).Distinct().ToList());
+            PartnerNames = new ObservableCollection<string>(partners.Select(p => p.PartnerName).Distinct().ToList());
         }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)

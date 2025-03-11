@@ -31,12 +31,36 @@ namespace Partner_Management.Views
 
             this.mainWindow = mainWindow;
             this.partner = partner;
+            DataContext = partnerViewModel;
 
-
+            PartnerNameTextBox.Text = partner.PartnerName;
+            PartnerTypeComboBox.SelectedItem = partner.PartnerTypeNavigation.PartnerTypeName;
+            CEONameTextBox.Text = partner.CeoName;
+            AddressTextBox.Text = partner.PartnerAddress;
+            EmailTextBox.Text = partner.PartnerEmail;
+            PhoneTextBox.Text = partner.PartnerPhone;
+            RatingTextBox.Text = partner.Rating.ToString();
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.OpenPage(MainWindow.Pages.PartnerList);
+        }
+
+        private void EditPartner(object sender, RoutedEventArgs e)
+        {
+            Partner partner = new Partner
+            {
+                PartnerId = this.partner.PartnerId,
+                PartnerName = PartnerNameTextBox.Text,
+                PartnerType = DatabaseControl.GetPartnerId(PartnerTypeComboBox.SelectedItem.ToString()),
+                CeoName = CEONameTextBox.Text,
+                PartnerAddress = AddressTextBox.Text,
+                PartnerEmail = EmailTextBox.Text,
+                PartnerPhone = PhoneTextBox.Text,
+                Rating = Decimal.Parse(RatingTextBox.Text)
+            };
+
+            DatabaseControl.UpdatePartner(partner);
         }
     }
 }

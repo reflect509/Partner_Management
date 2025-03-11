@@ -10,6 +10,12 @@
 
         <Style TargetType="Control">
             <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="20"/>
         </Style>
 
         <Style TargetType="TextBlock">

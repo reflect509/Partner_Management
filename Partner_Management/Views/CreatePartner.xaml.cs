@@ -1,4 +1,5 @@
-﻿using Partner_Management.ViewModels;
+﻿using Partner_Management.Models;
+using Partner_Management.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,30 @@ namespace Partner_Management.Views
 
             this.mainWindow = mainWindow;
             DataContext = partnerViewModel;
+
+            PartnerTypeComboBox.SelectedItem = "Введите тип партнера";
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.OpenPage(MainWindow.Pages.PartnerList);
+        }
+
+        private void AddPartner(object sender, RoutedEventArgs e)
+        {
+            Partner partner = new Partner
+            {
+                PartnerName = PartnerNameTextBox.Text,
+                PartnerType = DatabaseControl.GetPartnerId(PartnerTypeComboBox.SelectedItem.ToString()),
+                CeoName = CEONameTextBox.Text,
+                PartnerAddress = AddressTextBox.Text,
+                PartnerEmail = EmailTextBox.Text,
+                PartnerPhone = PhoneTextBox.Text,
+                Rating = Decimal.Parse(RatingTextBox.Text)
+            };
+
+            DatabaseControl.AddPartner(partner);
+            MessageBox.Show("Партнер добавлен успешно");
         }
     }
 }

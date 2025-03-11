@@ -20,23 +20,33 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" FontSize="30" Text="Создание партнера" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                   FontSize="30" Text="Создание партнера" HorizontalAlignment="Center"/>
 
         <Button Grid.Column="2" Grid.Row="0" Content="⏪" MinHeight="50" MinWidth="50" 
-                HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{StaticResource AccentColor}"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Background="{StaticResource AccentColor}"
                 Click="BackButton_Click"/>
         
-        <StackPanel Grid.Row="1" Grid.Column="1" Background="{StaticResource SecondaryColor}">
+        <StackPanel Grid.Row="0" Grid.Column="0" Background="{StaticResource SecondaryColor}" 
+                    Grid.ColumnSpan="3" Grid.RowSpan="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
 
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                <TextBox Name="PartnerNameTextBox" Text="Введите тип партнера"/>
+                <ComboBox Name="PartnerTypeComboBox" ItemsSource="{Binding PartnerTypes}"/>
                 <TextBox IsReadOnly="True" Text=" | "/>
-                <TextBox Name="PartnerTypeTextBox" Text="Введите имя партнера"/>
+                <TextBox Name="PartnerNameTextBox" Text="Введите название партнера"/>
+                
             </StackPanel>
 
             <TextBox x:Name="CEONameTextBox" Grid.Column="0" Grid.Row="1" Text="Введите директора"/>
             <TextBox x:Name="PhoneTextBox" Grid.Column="0" Grid.Row="2" Text="Введите номер телефона(10 цифр)"/>
+            <TextBox x:Name="EmailTextBox" Grid.Column="0" Grid.Row="2" Text="Введите email"/>
             <TextBox x:Name="RatingTextBox" Grid.Column="0" Grid.Row="3" Text="Введите рейтинг"/>
+            <TextBox x:Name="AddressTextBox" Grid.Column="0" Grid.Row="3" Text="Введите адрес"/>
         </StackPanel>
+
+        <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                Click="AddPartner" Content="Добавить партнера" Background="{StaticResource AccentColor}" MinHeight="50"/>
     </Grid>    
-</Page>
+</Page> 

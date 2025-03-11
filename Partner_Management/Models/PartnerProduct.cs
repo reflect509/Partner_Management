@@ -10,7 +10,7 @@ public partial class PartnerProduct
     public int PartnerId { get; set; }
 
     public int Amount { get; set; }
-
+    
     public DateOnly SellDate { get; set; }
 
     public virtual Partner Partner { get; set; } = null!;

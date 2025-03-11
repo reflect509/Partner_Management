@@ -19,7 +19,7 @@ public partial class Partner
 
     public string PartnerAddress { get; set; } = null!;
 
-    public string Tin { get; set; } = null!;
+    public string? Tin { get; set; }
 
     public decimal? Rating { get; set; }
 
