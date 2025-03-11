@@ -34,7 +34,7 @@ namespace Partner_Management
                 return -1;
             }
 
-            int materialUsage = (int)Math.Ceiling(quantity * (parameter1 * parameter2 * productCoefficient) * (materialBrokeCoefficient + 1));
+            int materialUsage = (int)(quantity * (parameter1 * parameter2 * productCoefficient) * (materialBrokeCoefficient + 1)) + 1;
 
             return materialUsage;
         }
