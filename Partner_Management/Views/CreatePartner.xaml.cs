@@ -41,6 +41,12 @@ namespace Partner_Management.Views
 
         private void AddPartner(object sender, RoutedEventArgs e)
         {
+            var rating = Decimal.Parse(RatingTextBox.Text);
+            if (rating < 0)
+            {
+                MessageBox.Show("Рейтинг не может быть отрицательным");
+                return;
+            }
             Partner partner = new Partner
             {
                 PartnerName = PartnerNameTextBox.Text,
@@ -49,7 +55,7 @@ namespace Partner_Management.Views
                 PartnerAddress = AddressTextBox.Text,
                 PartnerEmail = EmailTextBox.Text,
                 PartnerPhone = PhoneTextBox.Text,
-                Rating = Decimal.Parse(RatingTextBox.Text)
+                Rating = rating
             };
 
             DatabaseControl.AddPartner(partner);

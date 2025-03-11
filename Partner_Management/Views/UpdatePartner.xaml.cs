@@ -48,6 +48,17 @@ namespace Partner_Management.Views
 
         private void EditPartner(object sender, RoutedEventArgs e)
         {
+            var rating = Decimal.Parse(RatingTextBox.Text);
+            if (rating < 0)
+            {
+                MessageBox.Show("Рейтинг не может быть отрицательным");
+                return;
+            }
+            if (PartnerNameTextBox.Text == "" || CEONameTextBox.Text == "" || AddressTextBox.Text == "" || EmailTextBox.Text == "" || PhoneTextBox.Text == "")
+            {
+                MessageBox.Show("Заполните все поля");
+                return;
+            }
             Partner partner = new Partner
             {
                 PartnerId = this.partner.PartnerId,
@@ -57,7 +68,7 @@ namespace Partner_Management.Views
                 PartnerAddress = AddressTextBox.Text,
                 PartnerEmail = EmailTextBox.Text,
                 PartnerPhone = PhoneTextBox.Text,
-                Rating = Decimal.Parse(RatingTextBox.Text)
+                Rating = rating
             };
 
             DatabaseControl.UpdatePartner(partner);
