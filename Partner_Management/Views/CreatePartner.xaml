@@ -32,18 +32,34 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
 
-            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                <ComboBox Name="PartnerTypeComboBox" ItemsSource="{Binding PartnerTypes}"/>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <ComboBox Name="PartnerTypeComboBox" ItemsSource="{Binding PartnerTypes}"
+                          SelectedItem="Введите тип партнера"
+                          ToolTip="Выберете тип партнера"/>
                 <TextBox IsReadOnly="True" Text=" | "/>
-                <TextBox Name="PartnerNameTextBox" Text="Введите название партнера"/>
+                <TextBox Name="PartnerNameTextBox" Text="Введите название партнера"
+                         GotFocus="PartnerNameTextBox_GotFocus" 
+                         LostFocus="PartnerNameTextBox_LostFocus"
+                         HorizontalAlignment="Stretch"
+                         MinWidth="200"/>
                 
             </StackPanel>
 
-            <TextBox x:Name="CEONameTextBox" Grid.Column="0" Grid.Row="1" Text="Введите директора"/>
-            <TextBox x:Name="PhoneTextBox" Grid.Column="0" Grid.Row="2" Text="Введите номер телефона(10 цифр)"/>
-            <TextBox x:Name="EmailTextBox" Grid.Column="0" Grid.Row="2" Text="Введите email"/>
-            <TextBox x:Name="RatingTextBox" Grid.Column="0" Grid.Row="3" Text="Введите рейтинг"/>
-            <TextBox x:Name="AddressTextBox" Grid.Column="0" Grid.Row="3" Text="Введите адрес"/>
+            <TextBox x:Name="CEONameTextBox" Grid.Column="0" Grid.Row="1" Text="Введите директора"
+                     GotFocus="CEONameTextBox_GotFocus"
+                     LostFocus="CEONameTextBox_LostFocus"/>
+            <TextBox x:Name="PhoneTextBox" Grid.Column="0" Grid.Row="2" Text="Введите номер телефона(10 цифр)"
+                     GotFocus="PhoneTextBox_GotFocus"
+                     LostFocus="PhoneTextBox_LostFocus"/>
+            <TextBox x:Name="EmailTextBox" Grid.Column="0" Grid.Row="2" Text="Введите email"
+                     GotFocus="EmailTextBox_GotFocus"
+                     LostFocus="EmailTextBox_LostFocus"/>
+            <TextBox x:Name="RatingTextBox" Grid.Column="0" Grid.Row="3" Text="Введите рейтинг"
+                     GotFocus="RatingTextBox_GotFocus"
+                     LostFocus="RatingTextBox_LostFocus"/>
+            <TextBox x:Name="AddressTextBox" Grid.Column="0" Grid.Row="3" Text="Введите адрес"
+                     GotFocus="AddressTextBox_GotFocus"
+                     LostFocus="AddressTextBox_LostFocus"/>
         </StackPanel>
 
         <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"

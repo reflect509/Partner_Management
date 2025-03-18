@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Partner_Management.Models;
+﻿namespace Partner_Management.Models;
 
 public partial class PartnerProduct
 {
@@ -10,7 +7,7 @@ public partial class PartnerProduct
     public int PartnerId { get; set; }
 
     public int Amount { get; set; }
-    
+
     public DateOnly SellDate { get; set; }
 
     public virtual Partner Partner { get; set; } = null!;

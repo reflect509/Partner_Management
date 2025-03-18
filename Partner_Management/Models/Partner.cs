@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Partner_Management.Models;
+﻿namespace Partner_Management.Models;
 
 public partial class Partner
 {

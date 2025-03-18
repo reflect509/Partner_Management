@@ -1,19 +1,7 @@
 ﻿using Partner_Management.Models;
 using Partner_Management.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Partner_Management.Views
 {
@@ -30,6 +18,7 @@ namespace Partner_Management.Views
             InitializeComponent();
 
             this.mainWindow = mainWindow;
+            mainWindow.Title = "Изменение данных партнера";
             this.partner = partner;
             DataContext = partnerViewModel;
 
@@ -48,17 +37,26 @@ namespace Partner_Management.Views
 
         private void EditPartner(object sender, RoutedEventArgs e)
         {
-            var rating = Decimal.Parse(RatingTextBox.Text);
-            if (rating < 0)
+            var ratingCorrect = Decimal.TryParse(RatingTextBox.Text, out decimal rating);
+
+            if (!ratingCorrect)
             {
-                MessageBox.Show("Рейтинг не может быть отрицательным");
+                MessageBox.Show("Рейтинг введен неправильно");
                 return;
             }
+
+            if (rating < 0 || rating > 10)
+            {
+                MessageBox.Show("Рейтинг находится от 0 до 10");
+                return;
+            }
+
             if (PartnerNameTextBox.Text == "" || CEONameTextBox.Text == "" || AddressTextBox.Text == "" || EmailTextBox.Text == "" || PhoneTextBox.Text == "")
             {
                 MessageBox.Show("Заполните все поля");
                 return;
             }
+
             Partner partner = new Partner
             {
                 PartnerId = this.partner.PartnerId,

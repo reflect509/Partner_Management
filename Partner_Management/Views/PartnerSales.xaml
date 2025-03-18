@@ -51,7 +51,7 @@
                             <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Product.ProductName}"/>
                             <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Amount, StringFormat='Проданное количетсво {0}'}"/>
 
-                            <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding SellDate, StringFormat='Дата продажи: {0}'}"/>
+                            <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding SellDate, StringFormat=dd.MM.yyyy}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

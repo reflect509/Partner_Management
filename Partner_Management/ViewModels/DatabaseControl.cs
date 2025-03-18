@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Partner_Management.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Partner_Management.ViewModels
@@ -15,44 +10,17 @@ namespace Partner_Management.ViewModels
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                Dictionary<int, decimal> PartnerIdSales = new Dictionary<int, decimal>();
-                var deals = ctx.PartnerProducts.Include(p => p.Product).ToList();
-                foreach (var deal in deals)
+                ctx.Partners.Include(p => p.PartnerProducts).ToList().ForEach(p =>
                 {
-                    if (!PartnerIdSales.ContainsKey(deal.PartnerId))
                     {
-                        PartnerIdSales[deal.PartnerId] = 0;
+                        var sum = p.PartnerProducts.Sum(pp => pp.Amount);
+                        p.Discount = sum < 10000 ? 0M :
+                                     sum < 30000 ? 0.05M :
+                                     sum < 50000 ? 0.1M :
+                                     0.15M;
                     }
-                    else
-                    {
-                        PartnerIdSales[deal.PartnerId] += deal.Amount * deal.Product.MinCost;
-                    }
-                }
+                });
 
-                foreach (var partner in PartnerIdSales)
-                {
-                    var sum = partner.Value;
-                    decimal discount;
-
-                    if (sum < 1000000)
-                    {
-                        discount = 0;
-                    }
-                    else if (sum < 5000000)
-                    {
-                        discount = 0.05M;
-                    }
-                    else if (sum < 30000000)
-                    {
-                        discount = 0.1M;
-                    }
-                    else
-                    {
-                        discount = 0.15M;
-                    }
-
-                    ctx.Partners.Find(partner.Key).Discount = discount;
-                }
                 ctx.SaveChanges();
             }
         }
@@ -123,31 +91,19 @@ namespace Partner_Management.ViewModels
             }
         }
 
-        internal static decimal GetProductCoefficient(int productTypeId)
+        public static List<ProductType> GetProductTypes()
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                var type = ctx.ProductTypes.FirstOrDefault(t => t.ProductTypeId == productTypeId);
-                if (type == null)
-                {
-                    return -1;
-                }
-
-                return type.TypeCoefficient;
+                return ctx.ProductTypes.ToList();
             }
         }
 
-        internal static decimal GetMaterialCoefficient(int materialTypeId)
+        public static List<MaterialType> GetMaterialTypes()
         {
             using (DbAppContext ctx = new DbAppContext())
             {
-                var type = ctx.MaterialTypes.FirstOrDefault(t => t.MaterialTypeId == materialTypeId);
-                if (type == null)
-                {
-                    return -1;
-                }
-
-                return type.BrokenCoefficient;
+                return ctx.MaterialTypes.ToList();
             }
         }
     }

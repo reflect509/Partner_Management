@@ -1,19 +1,7 @@
 ﻿using Partner_Management.Models;
 using Partner_Management.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Partner_Management.Views
 {
@@ -28,6 +16,7 @@ namespace Partner_Management.Views
             InitializeComponent();
 
             this.mainWindow = mainWindow;
+            mainWindow.Title = "Список партнеров";
 
             DataContext = viewModel;
         }
@@ -46,6 +35,11 @@ namespace Partner_Management.Views
         private void PartnerSales_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.OpenPage(MainWindow.Pages.PartnerSales);
+        }
+
+        private void MaterialUsage_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.OpenPage(MainWindow.Pages.MaterialUsage);
         }
     }
 }

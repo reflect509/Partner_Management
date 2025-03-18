@@ -1,12 +1,7 @@
 ﻿using Partner_Management.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Partner_Management.ViewModels
 {
@@ -19,8 +14,8 @@ namespace Partner_Management.ViewModels
         public ObservableCollection<Partner> Partners
         {
             get { return partners; }
-            set 
-            { 
+            set
+            {
                 partners = value;
                 OnPropertyChanged(nameof(Partners));
             }
@@ -31,9 +26,9 @@ namespace Partner_Management.ViewModels
         public ObservableCollection<string> PartnerTypes
         {
             get { return partnerTypes; }
-            set 
-            { 
-                partnerTypes = value; 
+            set
+            {
+                partnerTypes = value;
                 OnPropertyChanged(nameof(PartnerTypes));
             }
         }
@@ -43,9 +38,9 @@ namespace Partner_Management.ViewModels
         public ObservableCollection<PartnerProduct> PartnerSales
         {
             get { return partnerSales; }
-            set 
-            { 
-                partnerSales = value; 
+            set
+            {
+                partnerSales = value;
                 OnPropertyChanged(nameof(PartnerSales));
             }
         }
@@ -55,10 +50,34 @@ namespace Partner_Management.ViewModels
         public ObservableCollection<string> PartnerNames
         {
             get { return partnerNames; }
-            set 
-            { 
+            set
+            {
                 partnerNames = value;
                 OnPropertyChanged(nameof(PartnerNames));
+            }
+        }
+
+        private ObservableCollection<MaterialType> materialTypes;
+
+        public ObservableCollection<MaterialType> MaterialTypes
+        {
+            get { return materialTypes; }
+            set
+            {
+                materialTypes = value;
+                OnPropertyChanged(nameof(MaterialTypes));
+            }
+        }
+
+        private ObservableCollection<ProductType> productTypes;
+
+        public ObservableCollection<ProductType> ProductTypes
+        {
+            get { return productTypes; }
+            set
+            {
+                productTypes = value;
+                OnPropertyChanged(nameof(ProductTypes));
             }
         }
 
@@ -71,12 +90,14 @@ namespace Partner_Management.ViewModels
         }
 
         private void LoadPartners()
-        {   
+        {
             DatabaseControl.GetDiscountForPartner();
             var partners = DatabaseControl.GetPartners();
             Partners = new ObservableCollection<Partner>(partners);
             PartnerTypes = new ObservableCollection<string>(partners.Select(p => p.PartnerTypeNavigation.PartnerTypeName).Distinct().ToList());
             PartnerNames = new ObservableCollection<string>(partners.Select(p => p.PartnerName).Distinct().ToList());
+            MaterialTypes = new ObservableCollection<MaterialType>(DatabaseControl.GetMaterialTypes());
+            ProductTypes = new ObservableCollection<ProductType>(DatabaseControl.GetProductTypes());
         }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)

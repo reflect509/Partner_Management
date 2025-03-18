@@ -1,0 +1,63 @@
+﻿<Page x:Class="Partner_Management.Views.MaterialUsage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Partner_Management.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MaterialUsage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="3" FontSize="30" Text="Калькулятор количества материала" HorizontalAlignment="Center"/>
+
+        <Button Grid.Column="2" Grid.Row="0" Content="⏪" MinHeight="50" MinWidth="50" 
+         HorizontalAlignment="Right" VerticalAlignment="Top" Background="{StaticResource AccentColor}"
+         Click="BackButton_Click"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Введите длину:" Margin="0 0 10 0"/>
+                <TextBox Name="LengthTextBox" MinWidth="30" Margin="0 0 0 20"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Введите ширину:" Margin="0 0 10 0"/>
+                <TextBox Name="WidthTextBox" MinWidth="30" Margin="0 0 0 20"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Введите количество:" Margin="0 0 10 0"/>
+                <TextBox Name="QuantityTextBox" MinWidth="30"/>
+            </StackPanel>
+        </StackPanel>        
+
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
+            <TextBlock Text="Выберите тип продукта"/>
+            <ComboBox Name="ProductTypeNameComboBox" ItemsSource="{Binding ProductTypes}" DisplayMemberPath="ProductTypeName"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <TextBlock Text="Выберите тип материала"/>
+            <ComboBox Name="MaterialTypeNameComboBox" ItemsSource="{Binding MaterialTypes}" DisplayMemberPath="MaterialTypeName"/>
+        </StackPanel>
+
+
+        <Button Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Click="CalculateMaterial_Click"
+                Content="Посчитать количество материала" Background="{StaticResource AccentColor}"/>
+    </Grid>
+</Page>

@@ -24,7 +24,9 @@
                 Content="+" MinHeight="40" MinWidth="40" Background="{StaticResource AccentColor}"
                 Click="CreatePartner_Click" Margin="5 0 0 0"/>
         </StackPanel>
-        
+
+        <Button Content="Калькулятор материала" FontSize="15" HorizontalAlignment="Left"
+                Click="MaterialUsage_Click" Background="{StaticResource AccentColor}" Margin="5 0 0 0"/>
 
         <ListBox x:Name="PartnerListBox" Grid.Row="1" ItemsSource="{Binding Partners}" 
                  HorizontalContentAlignment="Stretch" SelectionChanged="UpdatePartner_SelectionChanged">
